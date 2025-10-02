@@ -1,10 +1,11 @@
-#include <vector>
-#include <unordered_map>
 #include <string>
-
-static std::unordered_map<int, std::vector<std::string>> cache = std::unordered_map<int, std::vector<std::string>>();
+#include <unordered_map>
+#include <vector>
 
 class Solution {
+private:
+    static std::unordered_map<int, std::vector<std::string>> cache;
+
 public:
     std::vector<std::string> generateParenthesis(int n)
     {
@@ -40,3 +41,5 @@ public:
         return result;
     }
 };
+
+std::unordered_map<int, std::vector<std::string>> Solution::cache = std::unordered_map<int, std::vector<std::string>>();

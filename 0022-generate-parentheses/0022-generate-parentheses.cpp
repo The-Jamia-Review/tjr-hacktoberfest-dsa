@@ -4,9 +4,14 @@
 
 class Solution {
 private:
-    static std::unordered_map<int, std::vector<std::string>> cache;
+    std::unordered_map<int, std::vector<std::string>> cache;
 
 public:
+    Solution()
+        : cache(std::unordered_map<int, std::vector<std::string>>())
+    {
+    }
+
     std::vector<std::string> generateParenthesis(int n)
     {
         if (cache.find(n) != cache.end()) {
@@ -41,5 +46,3 @@ public:
         return result;
     }
 };
-
-std::unordered_map<int, std::vector<std::string>> Solution::cache = std::unordered_map<int, std::vector<std::string>>();

@@ -1,37 +1,38 @@
+import java.util.*;
+
 class Solution 
 {
     public List<List<Integer>> threeSum(int[] nums) 
     {
-        List<List<Integer>> list=new ArrayList<>();
-        int n=nums.length;
         Arrays.sort(nums);
-        for(int i=0;i<nums.length;i++){
-            if(i>0 && nums[i]==nums[i-1]){
-                continue;
-            }
-            int mid=i+1;
-            int end=n-1;
-            while(mid<end){
-                int sum=nums[i]+nums[mid]+nums[end];
-                if(sum==0){
-                    List<Integer> l=new ArrayList<>();
-                    l.add(nums[i]);
-                    l.add(nums[mid]);
-                    l.add(nums[end]);
-                    list.add(l);
-                    mid++;
-                    end--;
-                    while(mid<end && nums[mid]==nums[mid-1]) mid++;
-                    while(mid<end && nums[end]==nums[end+1]) end--;
+        Set<List<Integer>> uniq = new HashSet<>();
+        for(int i = 0; i < nums.length; i++)
+        {
+            //remove duplicates:
+            if (i != 0 && nums[i] == nums[i - 1]) continue;
+            int left = i+1;
+            int right = nums.length-1;
+            while(left<right)
+            {
+                if(nums[i]+nums[left]+nums[right]==0)
+                {
+                    uniq.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                    left++; right--;
+                    //skip the duplicates:
+                    while (left < right && nums[left] == nums[left - 1]) left++;
+                    while (left < right && nums[right] == nums[right + 1]) right--;
                 }
-                else if(sum>0){
-                    end--;
+                else if(nums[i]+nums[left]+nums[right]<0)
+                {
+                    left++;
                 }
-                else{
-                    mid++;
+                else
+                {
+                    right--;
                 }
             }
         }
-        return list;
+        
+        return new ArrayList<>(uniq);
     }
 }

@@ -10,7 +10,7 @@ public:
             
             int left = i + 1, right = n - 1;
             while (left < right) {
-                long sum = (long)nums[i] + nums[left] + nums[right];
+                long sum = (long)nums[i] + nums[left] + nums[right];  
                 
                 if (sum == 0) {
                     res.push_back({nums[i], nums[left], nums[right]});

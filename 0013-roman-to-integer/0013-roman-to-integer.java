@@ -1,29 +1,45 @@
-import java.util.*;
 class Solution {
     public int romanToInt(String s) {
-        Map<Character,Integer> map = new HashMap<>();
-        map.put('I',1);
-        map.put('V',5);
-        map.put('X',10);
-        map.put('L',50);
-        map.put('C',100);
-        map.put('D',500);
-        map.put('M',1000);
-        
-        int ans = 0;
-        int n = s.length();
-        for(int i = 0; i < s.length(); i++)
-        {
-            int currentVal = map.get(s.charAt(i));
-            
-            if (i + 1 < n && currentVal < map.get(s.charAt(i + 1))) 
-            {
-                ans += map.get(s.charAt(i + 1)) - currentVal;
-                i++; 
-            } 
-            else 
-            {
-                ans += currentVal;
+        int ans=0;
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)=='M'){
+                if(i>0 && s.charAt(i-1)=='C' ){
+                    ans+=800;
+                }
+                else ans+=1000;
+            }
+            else if(s.charAt(i)=='D'){
+                if(i>0 && s.charAt(i-1)=='C' ){
+                    ans+=300;
+                }
+                else ans+=500;
+            }
+            else if(s.charAt(i)=='C'){
+                if(i>0 && s.charAt(i-1)=='X' ){
+                    ans+=80;
+                }
+                else ans+=100;
+            }
+            else if(s.charAt(i)=='L'){
+                if(i>0 && s.charAt(i-1)=='X' ){
+                    ans+=30;
+                }
+                else ans+=50;
+            }
+            else if(s.charAt(i)=='X'){
+                if(i>0 && s.charAt(i-1)=='I' ){
+                    ans+=8;
+                }
+                else ans+=10;
+            }
+            else if(s.charAt(i)=='V'){
+                 if(i>0 && s.charAt(i-1)=='I' ){
+                    ans+=3;
+                }
+                else ans+=5;
+            }
+            else if(s.charAt(i)=='I'){
+                ans+=1;
             }
         }
         return ans;

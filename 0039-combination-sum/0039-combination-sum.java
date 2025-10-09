@@ -1,24 +1,30 @@
-class Solution {
-    public static List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<List<Integer>> list = new ArrayList<>();
-        fn(0, list,new ArrayList<>(), candidates, target);
-        System.out.println(list);
-        return list;
+import java.util.*;
+class Solution 
+{
+    public List<List<Integer>> combinationSum(int[] candidates, int target) 
+    {
+        List<List<Integer>> ans = new ArrayList<>();
+        backtrack(0, candidates, target, ans, new ArrayList<>());
+        return ans;
     }
+    
+    public void backtrack(int i, int[] arr, int target,  List<List<Integer>> ans, List<Integer> sub)
+    {
+        if (i == arr.length) 
+        {
+            if (target == 0) 
+            {
+                ans.add(new ArrayList < > (sub));
+            }
+            return;
+        }
 
-     public static void fn(int i,List<List<Integer>> list, List<Integer> l, int[] arr,int target){
-       if(i>=arr.length){
-        if(target==0) list.add(new ArrayList<>(l));
-        return;
-       }
-
-       if(arr[i]<=target){
-            l.add(arr[i]);
-            fn(i,list,l,arr,target-arr[i]);
-            l.remove(l.size()-1);
-       }
-
-       fn(i+1,list,l,arr,target);
+        if (arr[i] <= target) 
+        {
+            sub.add(arr[i]);
+            backtrack(i, arr, target - arr[i], ans, sub);
+            sub.remove(sub.size() - 1);
+        }
+        backtrack(i + 1, arr, target, ans, sub);
     }
 }
-
